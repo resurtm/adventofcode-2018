@@ -1,0 +1,22 @@
+{
+  "name": "adventofcode-2018",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:resurtm/adventofcode-2018.git",
+  "author": "resurtm <resurtm@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fast-levenshtein": "^0.0.1",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^10.12.11",
+    "@types/ramda": "^0.25.42",
+    "ramda": "^0.26.1",
+    "ts-node": "^7.0.1",
+    "ts-node-dev": "^1.0.0-pre.31",
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "fast-levenshtein": "^2.0.6",
+    "moment": "^2.22.2"
+  }
+}
