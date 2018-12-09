@@ -16,6 +16,8 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
+    "dbly-linked-list": "^0.2.0",
+    "double-linkedlist": "^1.0.4",
     "fast-levenshtein": "^2.0.6",
     "moment": "^2.22.2"
   }

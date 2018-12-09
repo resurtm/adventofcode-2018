@@ -161,6 +161,13 @@ dateformat@~1.0.4-1.2.3:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
+dbly-linked-list@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/dbly-linked-list/-/dbly-linked-list-0.2.0.tgz#d30f5225dc1ce72220d7931489b0c5703b1aa8aa"
+  integrity sha512-Ool7y15f6JRDs0YKx7Dh9uiTb1jS1SZLNdT3Y2q16DlaEghXbMsmODS/XittjR2xztt1gJUpz7jVxpqAPF8VGg==
+  dependencies:
+    lodash.isequal "^4.5.0"
+
 debounce@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
@@ -175,6 +182,11 @@ diff@^3.1.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
   integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
+
+double-linkedlist@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/double-linkedlist/-/double-linkedlist-1.0.4.tgz#8cd4091bf9a2422ba253628d25ef854bb4dbe15e"
+  integrity sha1-jNQJG/miQiuiU2KNJe+FS7Tb4V4=
 
 dynamic-dedupe@^0.2.0:
   version "0.2.0"
@@ -414,6 +426,11 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
   integrity sha1-eeTriMNqgSKvhvhEqpvNhRtfu1U=
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.keys@^3.0.0:
   version "3.1.2"
