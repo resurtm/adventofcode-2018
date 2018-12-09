@@ -72,6 +72,8 @@ while (true) {
     if (current >= finalMarble) {
         // console.log(player);
         // console.log(scores);
+        // console.log(iterations);
+        // console.log(current);
 
         console.log(Math.max(...Object.values(scores)));
         break;
