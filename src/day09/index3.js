@@ -1,13 +1,13 @@
-// const players = 9;
-// const finalMarble = 25;
+const players = 9;
+const finalMarble = 100;
 
 // const players = 30;
 // const finalMarble = 5807;
 
-const players = 441;
-const finalMarble = 71032;
+// const players = 441;
+// const finalMarble = 71032;
 
-const chain = [0];
+let chain = [0];
 let position = 0;
 let current = 0;
 let player = 0;
@@ -26,7 +26,7 @@ function previousElement(itemsBack) {
 }
 
 while (true) {
-    // console.log(`[${player}] ${chain.join(' ')}`);
+    console.log(`[${player}] ${chain.join(' ')}`);
 
     position += 2;
     position %= chain.length;
@@ -52,6 +52,8 @@ while (true) {
         position = prev9[0];
 
         chain.splice(prev8[0], 1);
+
+        console.log(prev8[1]);
     } else {
         chain.splice(position + 1, 0, current);
     }
@@ -61,8 +63,10 @@ while (true) {
         break;
     }
 
-    iterations++;
-    // if (iterations === 26) {
+    // console.log(current);
+
+    // iterations++;
+    // if (iterations === 60) {
     //     break;
     // }
 }

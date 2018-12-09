@@ -16,8 +16,10 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
+    "@thi.ng/dcons": "^1.1.16",
     "dbly-linked-list": "^0.2.0",
     "double-linkedlist": "^1.0.4",
+    "doubly-linked-list-js": "^0.1.8",
     "fast-levenshtein": "^2.0.6",
     "moment": "^2.22.2"
   }

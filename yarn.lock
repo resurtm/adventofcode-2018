@@ -2,6 +2,81 @@
 # yarn lockfile v1
 
 
+"@thi.ng/api@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@thi.ng/api/-/api-4.2.3.tgz#cacf594c7fe15caa637c011ba6ade127792d818a"
+  integrity sha512-futpLOGn7yL4YTruWdwmmfFm3Rq0Vj8qiZv5imjrL2f8SztY7+73mw16fUSo9XKq45MLZnntMjhAcfHI0kHqHA==
+  dependencies:
+    "@thi.ng/errors" "^0.1.11"
+
+"@thi.ng/checks@^1.5.13":
+  version "1.5.13"
+  resolved "https://registry.yarnpkg.com/@thi.ng/checks/-/checks-1.5.13.tgz#1f066907d48b8c52a80ab6528698b251a65a70ab"
+  integrity sha512-RvWQ0gwz8+GC6nifuM1o2bUaWEMfKud3nzBqhMGapks68cuJpmBcLjW1QIubDvR05jLMU+ubgXeypU0+1C7NXA==
+
+"@thi.ng/compare@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@thi.ng/compare/-/compare-0.1.11.tgz#a2491a428cf79ec39eebcbf6f5b69d97f8aaa3eb"
+  integrity sha512-CT6Cn9aLX4otfNtxqinl7Rzwbl9E+rUBH1kg93deK1cs+T4SwIOzA4nDUu6b7CDggp3nRVVd6uk3qVj6szEnIg==
+
+"@thi.ng/compose@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@thi.ng/compose/-/compose-0.2.1.tgz#0f85bb6e20bcf0839ef028bb22457479ca7100e2"
+  integrity sha512-mS08igjbI1FEkEWyKdFeKI+kKHBSc+RdRLnN4LI7bq8k9DpHOV/bJLvGIc6ZS/WYwtGGpzTB0S2li0ZK13pwEA==
+  dependencies:
+    "@thi.ng/api" "^4.2.3"
+    "@thi.ng/errors" "^0.1.11"
+
+"@thi.ng/dcons@^1.1.16":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@thi.ng/dcons/-/dcons-1.1.16.tgz#2eb1251973b5a3fef9362893acfd66c9346d4375"
+  integrity sha512-Vh9/Dg4C9H+JFAXUrx7wiGVvVSFBwxuIj6drxxNoGGZCiijtNGbTvyZZnwsp2zzus0R+8Udytv6IyNtAqCpzlQ==
+  dependencies:
+    "@thi.ng/api" "^4.2.3"
+    "@thi.ng/checks" "^1.5.13"
+    "@thi.ng/compare" "^0.1.11"
+    "@thi.ng/equiv" "^0.1.14"
+    "@thi.ng/errors" "^0.1.11"
+    "@thi.ng/transducers" "^2.2.4"
+
+"@thi.ng/equiv@^0.1.14":
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/@thi.ng/equiv/-/equiv-0.1.14.tgz#123dc48d6acc5704f4482cd32cd1419823e18cdb"
+  integrity sha512-5V9Z0Jd3Ftq5qSuGuwbvEqTNDkeYgd9QflROfd63UtbxxCo+Gj5CZV1FpVeqxgpunmcDAUfjGP9WvauwDJ0t/w==
+
+"@thi.ng/errors@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@thi.ng/errors/-/errors-0.1.11.tgz#f4f1177a1d44f549d76f5e4a1126d6cf7b89f426"
+  integrity sha512-SFV69GvN1Tuvy8x1zHUPkyWn91KfCEVXIEnZSXgJTGdPabopheQjeOo/Yd4ta83lzhLbtopumu0O9gkZYtkgxw==
+
+"@thi.ng/memoize@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@thi.ng/memoize/-/memoize-0.2.5.tgz#d5afee187642c7d4bd30454e5b15f07733676176"
+  integrity sha512-E6bIVk04LBLq1d04BY1Pqy1RuoO26UQ9CTfnhdWwegFU4ChB1Yrf8o05gxfTYmaAeBKJveuZJGkiUd0lm2RSWg==
+  dependencies:
+    "@thi.ng/api" "^4.2.3"
+
+"@thi.ng/strings@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@thi.ng/strings/-/strings-0.6.0.tgz#6686ece1d2e1ba0e19caf58dfe968b5d017eec22"
+  integrity sha512-KCg4Y4xE5VK9vkM1ogqN+3eKiD7xhrr/8ctKpgD+1kPHKR3hs/Jq/AS7TzmMY8KkUVSMhEvVqrBtlbLxpa7K0g==
+  dependencies:
+    "@thi.ng/errors" "^0.1.11"
+    "@thi.ng/memoize" "^0.2.5"
+
+"@thi.ng/transducers@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@thi.ng/transducers/-/transducers-2.2.4.tgz#17053a866782512aae4a779f5f1e5bfc0e713f5d"
+  integrity sha512-t6h1BxxqyMHmQV9GH3f5N433wyWe0cVLirpb1atZcL+eD2HGWeFclkFeImG+pfT9Uy19nl6VJ3by4DgmtqLQ8A==
+  dependencies:
+    "@thi.ng/api" "^4.2.3"
+    "@thi.ng/checks" "^1.5.13"
+    "@thi.ng/compare" "^0.1.11"
+    "@thi.ng/compose" "^0.2.1"
+    "@thi.ng/equiv" "^0.1.14"
+    "@thi.ng/errors" "^0.1.11"
+    "@thi.ng/strings" "^0.6.0"
+
 "@types/fast-levenshtein@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@types/fast-levenshtein/-/fast-levenshtein-0.0.1.tgz#3a3615cf173645c8fca58d051e4e32824e4bd286"
@@ -187,6 +262,11 @@ double-linkedlist@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/double-linkedlist/-/double-linkedlist-1.0.4.tgz#8cd4091bf9a2422ba253628d25ef854bb4dbe15e"
   integrity sha1-jNQJG/miQiuiU2KNJe+FS7Tb4V4=
+
+doubly-linked-list-js@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/doubly-linked-list-js/-/doubly-linked-list-js-0.1.8.tgz#7bc410340ada07fb644ce7ce37e3fd077c4cfeab"
+  integrity sha1-e8QQNAraB/tkTOfON+P9B3xM/qs=
 
 dynamic-dedupe@^0.2.0:
   version "0.2.0"
