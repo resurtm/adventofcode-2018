@@ -21,6 +21,7 @@
     "double-linkedlist": "^1.0.4",
     "doubly-linked-list-js": "^0.1.8",
     "fast-levenshtein": "^2.0.6",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "sleep-promise": "^8.0.1"
   }
 }

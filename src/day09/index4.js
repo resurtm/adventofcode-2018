@@ -40,7 +40,6 @@ function proceed() {
 }
 
 function backTo(num) {
-    // let iter = Object.assign({}, node);
     let iter = node;
     while (num > 0) {
         if (iter.prev == null) {
