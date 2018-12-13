@@ -2,6 +2,12 @@ import {readFile as readFileCallback} from 'fs';
 import {promisify} from 'util';
 import {filter, forEachObjIndexed, reduce} from 'ramda';
 
+enum Turn {
+    Left = 0,
+    Direct = 1,
+    Right = 2,
+}
+
 enum State {
     Empty = 0, // ' '
     CartUp = 1, // '^'
@@ -40,6 +46,7 @@ interface Vector {
 interface Cart {
     position: Vector;
     direction: State;
+    crosses: { [coord: string]: Turn }; // coord is for example '12_5' i.e. 'x_y'
 }
 
 const stateReverseMap: string[] = [];
@@ -110,6 +117,7 @@ function findCarts(state: State[][]): Cart[] {
                         y: Number(y),
                     },
                     direction: s,
+                    crosses: {},
                 });
             }
         }
@@ -143,31 +151,156 @@ async function calculatePart1(fileName: string): Promise<number> {
     const carts: Cart[] = findCarts(await prepareInput(fileName, false));
 
     let tick = 0;
-    while (tick < 5) {
+    while (tick < 50) {
         console.log(tick);
         debug(state, carts);
+
         for (const idx in carts) {
-            let {position: {x, y}, direction} = carts[idx];
-            switch (direction) {
-                case State.CartUp:
-                    y--;
-                    break;
-                case State.CartRight:
-                    x++;
-                    break;
-                case State.CartDown:
-                    y++;
-                    break;
-                case State.CartLeft:
-                    x--;
-                    break;
+            let {position: {x, y}, direction, crosses} = carts[idx];
+
+            if (state[x][y] === State.TrackCross) {
+                const coord = `${x}_${y}`;
+                let turn: Turn;
+                if (coord in crosses) {
+                    turn = crosses[coord];
+                    crosses[coord] = (crosses[coord] + 1) % 3;
+                } else {
+                    turn = Turn.Left;
+                    crosses[coord] = Turn.Direct;
+                }
+                switch (turn) {
+                    case Turn.Left:
+                        switch (direction) {
+                            case State.CartUp:
+                                x--;
+                                direction = State.CartLeft;
+                                break;
+                            case State.CartRight:
+                                y--;
+                                direction = State.CartUp;
+                                break;
+                            case State.CartDown:
+                                x++;
+                                direction = State.CartRight;
+                                break;
+                            case State.CartLeft:
+                                y++;
+                                direction = State.CartDown;
+                                break;
+                        }
+                        break;
+                    case Turn.Direct:
+                        switch (direction) {
+                            case State.CartUp:
+                                y--;
+                                break;
+                            case State.CartRight:
+                                x++;
+                                break;
+                            case State.CartDown:
+                                y++;
+                                break;
+                            case State.CartLeft:
+                                x--;
+                                break;
+                        }
+                        break;
+                    case Turn.Right:
+                        switch (direction) {
+                            case State.CartUp:
+                                x++;
+                                direction = State.CartRight;
+                                break;
+                            case State.CartRight:
+                                y++;
+                                direction = State.CartDown;
+                                break;
+                            case State.CartDown:
+                                x--;
+                                direction = State.CartLeft;
+                                break;
+                            case State.CartLeft:
+                                y--;
+                                direction = State.CartUp;
+                                break;
+                        }
+                        break;
+                }
+            } else if (state[x][y] === State.TurnRightBottom) {
+                switch (direction) {
+                    case State.CartUp:
+                        x++;
+                        direction = State.CartRight;
+                        break;
+                    case State.CartRight:
+                        y--;
+                        direction = State.CartUp;
+                        break;
+                    case State.CartDown:
+                        x--;
+                        direction = State.CartLeft;
+                        break;
+                    case State.CartLeft:
+                        y++;
+                        direction = State.CartDown;
+                        break;
+                }
+            } else if (state[x][y] === State.TurnTopRight) {
+                switch (direction) {
+                    case State.CartUp:
+                        x--;
+                        direction = State.CartLeft;
+                        break;
+                    case State.CartRight:
+                        y++;
+                        direction = State.CartDown;
+                        break;
+                    case State.CartDown:
+                        x++;
+                        direction = State.CartRight;
+                        break;
+                    case State.CartLeft:
+                        y--;
+                        direction = State.CartUp;
+                        break;
+                }
+            } else {
+                switch (direction) {
+                    case State.CartUp:
+                        y--;
+                        break;
+                    case State.CartRight:
+                        x++;
+                        break;
+                    case State.CartDown:
+                        y++;
+                        break;
+                    case State.CartLeft:
+                        x--;
+                        break;
+                }
             }
+
             carts[idx].position = {x, y};
+            carts[idx].direction = direction;
+            carts[idx].crosses = crosses;
         }
+
+        for (let i = 0; i < carts.length; i++) {
+            for (let j = 0; j < carts.length; j++) {
+                if (i === j) {
+                    continue;
+                }
+                if (carts[i].position.x === carts[j].position.x && carts[i].position.y === carts[j].position.y) {
+                    break;
+                }
+            }
+        }
+
         tick++;
     }
 
-    return Promise.resolve(0);
+    return Promise.resolve(tick);
 }
 
 (async () => {
