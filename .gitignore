@@ -2,3 +2,4 @@
 node_modules
 input*.txt
 yarn-error.log
+*.py

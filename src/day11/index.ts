@@ -1,8 +1,7 @@
 // const serialNumber = 18;
 // const serialNumber = 42;
 const serialNumber = 1308;
-const cellsWidth = 300;
-const cellsHeight = 300;
+const cellsSize = 300;
 
 function getHundreds(x: number): number {
     const str = Math.abs(x).toString().split('').reverse().join('');
@@ -21,15 +20,15 @@ function cellsPower(cells: number[][], x: number, y: number, sizeX: number, size
 
 function fillCells(serNum: number): number[][] {
     const cells: number[][] = [];
-    for (let i = 0; i < cellsWidth; i++) {
+    for (let i = 0; i < cellsSize; i++) {
         const temp: number[] = [];
-        for (let j = 0; j < cellsHeight; j++) {
+        for (let j = 0; j < cellsSize; j++) {
             temp.push(0);
         }
         cells.push(temp);
     }
-    for (let i = 0; i < cellsWidth; i++) {
-        for (let j = 0; j < cellsHeight; j++) {
+    for (let i = 0; i < cellsSize; i++) {
+        for (let j = 0; j < cellsSize; j++) {
             const x = i + 1;
             const y = j + 1;
             const rackID = x + 10;
@@ -43,8 +42,8 @@ function fillCells(serNum: number): number[][] {
 function calculatePart1(): string {
     const cells = fillCells(serialNumber);
     let maxI = 0, maxJ = 0, max = cellsPower(cells, maxI, maxJ, 3, 3);
-    for (let i = 0; i < cellsWidth - 2; i++) {
-        for (let j = 0; j < cellsHeight - 2; j++) {
+    for (let i = 0; i < cellsSize - 2; i++) {
+        for (let j = 0; j < cellsSize - 2; j++) {
             const power = cellsPower(cells, i, j, 3, 3);
             if (power > max) {
                 max = power;
@@ -53,15 +52,15 @@ function calculatePart1(): string {
             }
         }
     }
-    return [maxI + 1, maxJ + 1].join(',');
+    return [maxI + 1, maxJ + 1, max].join(',');
 }
 
 function calculatePart2(): string {
     const cells = fillCells(serialNumber);
     let maxSize = 1, maxI = 0, maxJ = 0, max = cellsPower(cells, maxI, maxJ, maxSize, maxSize);
     for (let size = 1; size <= 300; size++) {
-        for (let i = 0; i < cellsWidth - (size - 1); i++) {
-            for (let j = 0; j < cellsHeight - (size - 1); j++) {
+        for (let i = 0; i < cellsSize - (size - 1); i++) {
+            for (let j = 0; j < cellsSize - (size - 1); j++) {
                 const power = cellsPower(cells, i, j, size, size);
                 if (power > max) {
                     maxSize = size;
@@ -72,7 +71,7 @@ function calculatePart2(): string {
             }
         }
     }
-    return [maxI + 1, maxJ + 1, maxSize].join(',');
+    return [maxI + 1, maxJ + 1, maxSize, max].join(',');
 }
 
 (function run() {
