@@ -45,8 +45,10 @@ interface Vector {
 
 interface Cart {
     position: Vector;
+    prevPos: Vector;
     direction: State;
-    crosses: { [coord: string]: Turn }; // coord is for example '12_5' i.e. 'x_y'
+    turn: Turn;
+    crashed: boolean;
 }
 
 const stateReverseMap: string[] = [];
@@ -116,8 +118,13 @@ function findCarts(state: State[][]): Cart[] {
                         x: Number(x),
                         y: Number(y),
                     },
+                    prevPos: {
+                        x: -1,
+                        y: -1,
+                    },
                     direction: s,
-                    crosses: {},
+                    turn: Turn.Left,
+                    crashed: false,
                 });
             }
         }
@@ -146,28 +153,42 @@ function debug(state: State[][], carts: Cart[]): void {
     console.log(out);
 }
 
-async function calculatePart1(fileName: string): Promise<number> {
+function debugCarts(carts: Cart[]): void {
+    let out: string = '';
+    for (const cart of carts) {
+        out += `[${cart.position.x},${cart.position.y},${cart.direction}]`;
+    }
+    console.log(out);
+}
+
+async function calculatePart1(fileName: string): Promise<Vector> {
     const state: State[][] = await prepareInput(fileName);
     const carts: Cart[] = findCarts(await prepareInput(fileName, false));
+    let firstCrash: Vector | null = null;
 
     let tick = 0;
-    while (tick < 50) {
-        console.log(tick);
-        debug(state, carts);
+    // while (tick < 10) {
+    while (true) {
+        tick++;
+
+        // if (tick === 136) {
+        //     debug(state, carts);
+        //     break;
+        // }
+
+        // console.log(tick);
+        // debug(state, carts);
+        // debugCarts(carts);
 
         for (const idx in carts) {
-            let {position: {x, y}, direction, crosses} = carts[idx];
+            if (carts[idx].crashed) {
+                continue;
+            }
+
+            let {position: {x, y}, direction, turn} = carts[idx];
+            carts[idx].prevPos = {x, y};
 
             if (state[x][y] === State.TrackCross) {
-                const coord = `${x}_${y}`;
-                let turn: Turn;
-                if (coord in crosses) {
-                    turn = crosses[coord];
-                    crosses[coord] = (crosses[coord] + 1) % 3;
-                } else {
-                    turn = Turn.Left;
-                    crosses[coord] = Turn.Direct;
-                }
                 switch (turn) {
                     case Turn.Left:
                         switch (direction) {
@@ -226,6 +247,7 @@ async function calculatePart1(fileName: string): Promise<number> {
                         }
                         break;
                 }
+                turn = (turn + 1) % 3;
             } else if (state[x][y] === State.TurnRightBottom) {
                 switch (direction) {
                     case State.CartUp:
@@ -283,27 +305,56 @@ async function calculatePart1(fileName: string): Promise<number> {
 
             carts[idx].position = {x, y};
             carts[idx].direction = direction;
-            carts[idx].crosses = crosses;
-        }
+            carts[idx].turn = turn;
 
-        for (let i = 0; i < carts.length; i++) {
-            for (let j = 0; j < carts.length; j++) {
-                if (i === j) {
-                    continue;
-                }
-                if (carts[i].position.x === carts[j].position.x && carts[i].position.y === carts[j].position.y) {
-                    break;
+            for (let i = 0; i < carts.length; i++) {
+                for (let j = 0; j < carts.length; j++) {
+                    if (i === j || carts[i].crashed || carts[j].crashed) {
+                        continue;
+                    }
+                    if (equalPos(carts[i].position, carts[j].position)) {
+                        if (firstCrash === null) {
+                            firstCrash = carts[j].position;
+                        }
+                        // console.log(tick);
+                        // return Promise.resolve(carts[j].position);
+                        carts[i].crashed = true;
+                        carts[j].crashed = true;
+                    }
                 }
             }
         }
 
-        tick++;
+        let crashedCount = 0;
+        for (let i = 0; i < carts.length; i++) {
+            if (carts[i].crashed) {
+                crashedCount++;
+            }
+        }
+        if (carts.length - 1 === crashedCount) {
+            for (let i = 0; i < carts.length; i++) {
+                if (!carts[i].crashed) {
+                    console.log(carts[i].position)
+                }
+            }
+            break;
+        }
+
+        carts.sort((a, b): number => (a.position.x * 10000 + a.position.y) < (b.position.x * 10000 + b.position.y) ? -1 : 1);
     }
 
-    return Promise.resolve(tick);
+    console.log(firstCrash);
+    return Promise.resolve({x: -1, y: -1});
+}
+
+function equalPos(a: Vector, b: Vector): boolean {
+    return a.x === b.x && a.y === b.y;
 }
 
 (async () => {
-    console.log(await calculatePart1('input-2.txt'));
+    console.log(await calculatePart1('input-3.txt'));
     // console.log(await calculatePart2('input-1.txt'));
 })();
+
+// 123,41, not right
+// 18,48, not right
