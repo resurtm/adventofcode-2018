@@ -317,7 +317,7 @@ async function calculatePart1(fileName: string): Promise<Vector> {
                             firstCrash = carts[j].position;
                         }
                         // console.log(tick);
-                        // return Promise.resolve(carts[j].position);
+                        return Promise.resolve(carts[j].position);
                         carts[i].crashed = true;
                         carts[j].crashed = true;
                     }
@@ -352,7 +352,7 @@ function equalPos(a: Vector, b: Vector): boolean {
 }
 
 (async () => {
-    console.log(await calculatePart1('input-3.txt'));
+    console.log(await calculatePart1('input-5.txt'));
     // console.log(await calculatePart2('input-1.txt'));
 })();
 
